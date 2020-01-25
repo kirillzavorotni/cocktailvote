@@ -1,9 +1,9 @@
 <?php
 
 
-class ApplicationController
+abstract class AbstractController
 {
-    public function beforeAction()
+    static public function beforeAction()
     {
 
     }

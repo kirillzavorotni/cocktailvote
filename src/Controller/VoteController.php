@@ -1,7 +1,7 @@
 <?php
 
 
-class VoteController
+class VoteController extends AbstractController
 {
 
 }
