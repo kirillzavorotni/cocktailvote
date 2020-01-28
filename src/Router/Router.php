@@ -10,7 +10,6 @@ class Router
     public function __construct()
     {
         $this->routes = include "../config/routes.php";
-        $this->getControllerAction();
     }
 
     public function getControllerAction()

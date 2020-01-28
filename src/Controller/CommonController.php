@@ -1,7 +1,7 @@
 <?php
 
 
-abstract class AbstractController
+class CommonController
 {
     static public function beforeAction()
     {

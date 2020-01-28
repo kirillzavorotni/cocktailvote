@@ -1,7 +1,7 @@
 <?php
 
 
-class AuthController extends AbstractController
+class AuthController extends CommonController
 {
     public function authAction()
     {
