@@ -14,6 +14,8 @@ class Kernel
      * @throws NotFoundException
      */
     public function handleRequest() {
+        CommonController::checkTimeInterval();
+
         list($controllerClass, $actionName) = $this->router->getControllerAction(); // get controller name and method of it
         $controller = new $controllerClass();
 

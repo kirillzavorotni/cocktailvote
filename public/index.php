@@ -9,4 +9,3 @@ try {
     http_response_code($exception->getCode());
     echo $exception->getMessage();
 }
-
