@@ -1,9 +1,10 @@
 <?php
 
 return [
+    'GET /' => ['DefaultController', 'indexAction'],
+
     'POST /auth' => ['AuthController', 'authAction'],
     'GET /validate' => ['AuthController', 'validateAction'],
 
-    'GET /votes' => ['VoteController' => 'votesAction'],
-    'POST /vote' => ['VoteController' => 'voteAction']
+    'POST /vote' => ['VoteController', 'voteAction']
 ];

@@ -6,10 +6,14 @@ class Router
 {
 
     private $routes;
+    private $db_conf;
 
     public function __construct()
     {
         $this->routes = include "../config/routes.php";
+        $this->db_conf = include "../config/db_conf.php";
+
+        R::setup( $this->db_conf["dsn"], $this->db_conf["user"], $this->db_conf["pass"]);
     }
 
     public function getControllerAction()
