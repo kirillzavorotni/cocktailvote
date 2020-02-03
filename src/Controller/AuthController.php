@@ -8,9 +8,13 @@ class AuthController extends CommonController
      */
     public function authAction()
     {
-        if (!CommonController::isEmailRequestValidate($this->getRequestContent())) {
+        $data = $this->getRequestContent();
+        if (!CommonController::isEmailRequestValidate($data)) {
             CommonController::sendJSONResponse(false, "400", "enc");
         }
+
+        $user = new UserModel();
+        $user->init($data);
 
 
 
