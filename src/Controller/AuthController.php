@@ -15,23 +15,13 @@ class AuthController extends CommonController
 
         $user = new UserModel();
         $user->init($data);
-
-
-
-//        kirill@mail.com
-
-//        $user  = R::findOne( 'user', ' email = ? ', [ 'kirill@mail.com' ] );
-//        $user = R::dispense( 'user' );
-//        $user->email = 'sssss@mail.com';
-//        $user->cookie_hash = 'tetertertert';
-//        $user->confirm_token = 'vbvbvbvbvb';
-//        $id = R::store( $user );
-//
-//        var_dump($id);
     }
 
     public function validateAction()
     {
-        echo 'validate';
+//        $db_conf = include "../config/db_conf.php";
+//        R::setup($this->db_conf["dsn"], $this->db_conf["user"], $this->db_conf["pass"]);
+//
+//        $result = R::load('user', )
     }
 }

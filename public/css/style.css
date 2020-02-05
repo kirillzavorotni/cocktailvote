@@ -8,6 +8,10 @@
     height: 200px;
     background-color: #37896E;
     margin: 10px auto;
+    color: #fff;
+    font-size: 35px;
+    text-align: center;
+    padding: 20px 0;
 }
 
 #form_wrap {

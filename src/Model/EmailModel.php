@@ -11,7 +11,8 @@ class EmailModel
         $this->messageConfig = include "../config/confirmMessageConfig.php";
     }
 
-    public function init($data)
+
+    public function init(\RedBeanPHP\OODBBean $data)
     {
         $this->data = $data;
         $this->prepareSending();
@@ -21,22 +22,40 @@ class EmailModel
     {
         $httpDomain = $_SERVER["HTTP_REFERER"];
         $activateLink = $this->getActivateLink($httpDomain);
-
         $messageTemplate = $this->getMessageTemplate($activateLink);
+
+        $this->sendEmail($messageTemplate);
+
+        CommonController::sendJSONResponse(true, "200", "cem", [], $this->data["cookie_hash"]);
     }
 
+
+    //////////////////////////////////////////
+    /////////   Generate text   //////////////
+    //////////////////////////////////////////
+
+    /**
+     * @param String $httpDomain
+     * @return string
+     */
     private function getActivateLink(String $httpDomain): string
     {
         return $httpDomain . "activate?token=" . $this->data["confirm_token"];
     }
 
+    /**
+     * @param String $linktext
+     * @return string
+     */
     private function getMessageTemplate(String $linktext): string
     {
         return $this->messageConfig["message"] . "<br><br>" . "<a href='" . $linktext . "'>Click here</a>" ;
     }
 
+
+
     private function sendEmail(String $mailText)
     {
-
+//        var_dump($this->data);
     }
 }

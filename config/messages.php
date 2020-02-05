@@ -10,4 +10,10 @@ return [
     "404" => [
         'nfd' => "Not Found" // Not found
     ],
+    "200" => [
+        'cem' => "We have send you confirm email, please do it" // Confirm email message
+    ],
+    "500" => [
+        'cncu' => "Internal error. Try again later" // Can't to create user
+    ]
 ];

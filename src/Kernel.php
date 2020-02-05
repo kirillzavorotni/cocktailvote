@@ -19,7 +19,7 @@ class Kernel
         list($controllerClass, $actionName) = $this->router->getControllerAction(); // get controller name and method of it
         $controller = new $controllerClass();
 
-        CommonController::checkTimeInterval($controllerClass);
+        CommonController::checkTimeInterval($controllerClass, $actionName);
 
         $controller->$actionName();
     }

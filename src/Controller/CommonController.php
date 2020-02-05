@@ -7,6 +7,7 @@ class CommonController
     static private $messages;
 
     static private $defaultControllerName = "DefaultController";
+    static private $indexActionName = "indexAction";
 
     public function getRequestContent()
     {
@@ -16,9 +17,10 @@ class CommonController
     }
 
     /**
-     * @param $controllerClass
+     * @param String $controllerClass
+     * @param String $actionName
      */
-    static public function checkTimeInterval(String $controllerClass)
+    static public function checkTimeInterval(String $controllerClass, String $actionName)
     {
         self::$timeConfig = include "../config/permittedDate.php";
         self::$messages = include "../config/messages.php";
@@ -32,9 +34,13 @@ class CommonController
 //        if ($currentDate < $times[0] || $currentDate > $times[1]) {
 //            throw new NotVoteAccessException();
 //        }
+
         $currentDate = date("Y-m-d H:i:s");
 
-        if ($controllerClass !== self::$defaultControllerName && $currentDate < self::$timeConfig[0] || $currentDate > self::$timeConfig[1]) {
+        if (
+            ($currentDate < self::$timeConfig[0] || $currentDate > self::$timeConfig[1]) &&
+            ($controllerClass !== self::$defaultControllerName && $actionName !== self::$indexActionName)
+        ) {
             self::sendJSONResponse(false, "403", "nva");
         }
     }
@@ -55,13 +61,8 @@ class CommonController
         return self::$messages[$code][$errCode];
     }
 
-    /**
-     * @param bool $status
-     * @param String $code
-     * @param String $errCode
-     * @param array $data
-     */
-    static public function sendJSONResponse(Bool $status, String $code, String $errCode, Array $data = [])
+
+    static public function sendJSONResponse(Bool $status, String $code, String $errCode, Array $data = [], String $cookieId = null)
     {
         $res = json_encode([
             "status" => $status,
@@ -69,6 +70,9 @@ class CommonController
             "msg" => self::getResponseMessage($code, $errCode),
             "data" => $data
         ]);
+
+        self::setCookie($cookieId);
+
         header("Content-type: application/json; charset=UTF-8");
         header("Content-Length: " . strlen($res));
         http_response_code($code);
@@ -76,8 +80,12 @@ class CommonController
         die;
     }
 
-    static public function setCookie()
+    static public function setCookie($cookieId)
     {
-
+        if (!isset($cookieId)) {
+            setcookie("id", "", time() - 3600*24*365*10, "/");
+        } else {
+            setcookie("id", $cookieId, time() + 3600*24*365*10, "/");
+        }
     }
 }
