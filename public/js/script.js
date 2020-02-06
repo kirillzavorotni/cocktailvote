@@ -88,6 +88,22 @@ const codeAction = {
             }
         }
     },
+    /**
+     * Not vote access
+     */
+    "nva": {
+        status: false,
+        action: (msg, status) => {
+            if (!status) {
+                hideAllControl();
+                if (msg) {
+                    product.innerHTML = msg;
+                    return;
+                }
+                product.innerHTML = "";
+            }
+        }
+    },
 };
 
 
@@ -116,6 +132,7 @@ function hideAllControl() {
     email_input.style.display = "none";
     send_email_btn.style.display = "none";
     send_again_btn.style.display = "none";
+    vote_btn.style.display = "none";
 }
 
 function hideSendAgainBtn() {
