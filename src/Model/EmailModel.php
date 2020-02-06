@@ -20,6 +20,10 @@ class EmailModel
 
     private function prepareSending()
     {
+        if (!isset($_SERVER["HTTP_REFERER"])) {
+            throw new NotFoundException();
+        }
+
         $httpDomain = $_SERVER["HTTP_REFERER"];
         $activateLink = $this->getActivateLink($httpDomain);
         $messageTemplate = $this->getMessageTemplate($activateLink);

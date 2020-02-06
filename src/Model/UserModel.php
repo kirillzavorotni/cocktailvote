@@ -35,7 +35,8 @@ class UserModel extends CommonModel
             true,
             "200",
             "sa",
-            ["voteCount" => $votesLeft >= 0 ? $votesLeft : 0]
+            ["voteCount" => $votesLeft >= 0 ? $votesLeft : 0],
+            $this->getCookieHashFromUser($user)
         );
     }
 
@@ -53,24 +54,6 @@ class UserModel extends CommonModel
         return $user ? $user : null;
     }
 
-    /**
-     * @param \RedBeanPHP\OODBBean $user
-     * @return bool|mixed
-     */
-    private function getConfirmedStatusFromUser(\RedBeanPHP\OODBBean $user): bool
-    {
-        return $user['confirm_status'] ? $user['confirm_status'] : false;
-    }
-
-    /**
-     * @param \RedBeanPHP\OODBBean $user
-     * @return int
-     */
-    private function getLeftVoteCount(\RedBeanPHP\OODBBean $user): int
-    {
-        return R::count( 'vote', 'user_id = ?', [$user["id"]]);
-    }
-
 
     ///////////////////////////////////////
     /////////   Create new user   /////////
@@ -81,8 +64,8 @@ class UserModel extends CommonModel
      */
     private function createNewRecord()
     {
-        $uniqToken = CommonModel::generateToken();
-        $cookieHash = CommonModel::generateCookieHash();
+        $uniqToken = $this->generateToken();
+        $cookieHash = $this->generateCookieHash();
 
         if (isset($uniqToken) && $cookieHash) {
             return $this->insertUser($this->data["email"], $uniqToken, $cookieHash);

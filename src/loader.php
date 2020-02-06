@@ -19,4 +19,5 @@ require_once '../src/Controller/VoteController.php';
 // Models
 require_once '../src/Model/CommonModel.php';
 require_once '../src/Model/UserModel.php';
+require_once '../src/Model/ValidateModel.php';
 require_once '../src/Model/EmailModel.php';

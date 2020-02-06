@@ -12,7 +12,6 @@ class Kernel
 
     /**
      * @throws NotFoundException
-     * @throws NotVoteAccessException
      */
     public function handleRequest() {
 

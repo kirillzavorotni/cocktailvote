@@ -24,16 +24,6 @@ class CommonController
     {
         self::$timeConfig = include "../config/permittedDate.php";
         self::$messages = include "../config/messages.php";
-//        $times = [
-//            date_create(gmdate("Y-m-d H:i:s", strtotime(self::$timeConfig[0] . self::$timeConfig[2]))),
-//            date_create(gmdate("Y-m-d H:i:s", strtotime(self::$timeConfig[1] . self::$timeConfig[2])))
-//        ];
-//
-//        $currentDate = date_create(gmdate("Y-m-d H:i:s", strtotime(self::$timeConfig[2])));
-//
-//        if ($currentDate < $times[0] || $currentDate > $times[1]) {
-//            throw new NotVoteAccessException();
-//        }
 
         $currentDate = date("Y-m-d H:i:s");
 
@@ -62,7 +52,7 @@ class CommonController
     }
 
 
-    static public function sendJSONResponse(Bool $status, String $code, String $errCode, Array $data = [], String $cookieId = null)
+    static public function sendJSONResponse(Bool $status, String $code, String $errCode, Array $data = [], String $cookieId = null, Bool $changeCookie = true)
     {
         $res = json_encode([
             "status" => $status,
@@ -71,7 +61,7 @@ class CommonController
             "data" => $data
         ]);
 
-        self::setCookie($cookieId);
+        self::setCookie($cookieId, $changeCookie);
 
         header("Content-type: application/json; charset=UTF-8");
         header("Content-Length: " . strlen($res));
@@ -80,12 +70,25 @@ class CommonController
         die;
     }
 
-    static public function setCookie($cookieId)
+    static public function setCookie($cookieId = null, $changeCookie = true)
     {
-        if (!isset($cookieId)) {
+        if (!isset($cookieId) && $changeCookie) {
             setcookie("id", "", time() - 3600*24*365*10, "/");
-        } else {
+        }
+
+        if (isset($cookieId)) {
             setcookie("id", $cookieId, time() + 3600*24*365*10, "/");
         }
+    }
+
+    /**
+     * @return bool
+     */
+    static public function isCookieRequestValidate()
+    {
+        if (isset($_COOKIE) && isset($_COOKIE["id"]) && strlen($_COOKIE["id"]) > 0) {
+            return true;
+        }
+        return false;
     }
 }

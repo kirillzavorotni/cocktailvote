@@ -19,9 +19,12 @@ class AuthController extends CommonController
 
     public function validateAction()
     {
-//        $db_conf = include "../config/db_conf.php";
-//        R::setup($this->db_conf["dsn"], $this->db_conf["user"], $this->db_conf["pass"]);
-//
-//        $result = R::load('user', )
+        if (!CommonController::isCookieRequestValidate()) {
+            CommonController::setCookie();
+            throw new NotFoundException();
+        }
+
+        $validate = new ValidateModel();
+        $validate->init();
     }
 }

@@ -17,7 +17,7 @@ class CommonModel
     /**
      * @return false|string
      */
-    static function generateToken()
+    protected function generateToken()
     {
         return bin2hex(openssl_random_pseudo_bytes(50));
     }
@@ -25,8 +25,35 @@ class CommonModel
     /**
      * @return string
      */
-    static function generateCookieHash()
+    protected function generateCookieHash()
     {
         return hash("sha256", bin2hex(openssl_random_pseudo_bytes(20)));
+    }
+
+    /**
+     * @param \RedBeanPHP\OODBBean $user
+     * @return bool|mixed
+     */
+    protected function getConfirmedStatusFromUser(\RedBeanPHP\OODBBean $user): bool
+    {
+        return $user['confirm_status'] ? $user['confirm_status'] : false;
+    }
+
+    /**
+     * @param \RedBeanPHP\OODBBean $user
+     * @return string
+     */
+    protected function getCookieHashFromUser(\RedBeanPHP\OODBBean $user): string
+    {
+        return $user['cookie_hash'] ? $user['cookie_hash'] : '';
+    }
+
+    /**
+     * @param \RedBeanPHP\OODBBean $user
+     * @return int
+     */
+    protected function getLeftVoteCount(\RedBeanPHP\OODBBean $user): int
+    {
+        return R::count( 'vote', 'user_id = ?', [$user["id"]]);
     }
 }

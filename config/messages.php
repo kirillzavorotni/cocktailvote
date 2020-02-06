@@ -12,6 +12,7 @@ return [
     ],
     "200" => [
         'cem' => "We have send you confirm email, please do it", // Confirm email message
+        'mc' => "We remember you, when we sent you an email with a confirmation link, please confirm your email", // Make confirm email
         'sa' => "Successful authorization", // Successful authorization
     ],
     "500" => [

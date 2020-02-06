@@ -5,7 +5,7 @@ const vote_btn = document.querySelector('#vote_btn_id');
 const send_again_btn = document.querySelector('#send_again_btn_id');
 
 const additionalMessages = {
-  "emailAgain": "Enter email again"
+    "emailAgain": "Enter email again"
 };
 
 const codeAction = {
@@ -40,6 +40,9 @@ const codeAction = {
             }
         }
     },
+    /**
+     * Can't to create user
+     */
     "cncu": {
         status: false,
         action: (msg, status) => {
@@ -52,20 +55,39 @@ const codeAction = {
             }
         }
     },
+    /**
+     * Successful authorization
+     */
     "sa": {
         status: true,
         action: (msg, status, data) => {
             if (status) {
                 if (data["voteCount"]) {
                     product.innerHTML = `You have ${data["voteCount"]} votes`;
-
+                    showVoteBtn();
                 } else {
                     product.innerHTML = "You don't have votes";
                 }
                 hideAllControl();
             }
         }
-    }
+    },
+    /**
+     * Make confirm email
+     */
+    "mc": {
+        status: true,
+        action: (msg, status) => {
+            if (status) {
+                showSendAgainBtn();
+                if (msg) {
+                    product.innerHTML = msg;
+                    return;
+                }
+                product.innerHTML = "";
+            }
+        }
+    },
 };
 
 
@@ -107,6 +129,13 @@ function showSendAgainBtn() {
     send_again_btn.style.display = "block";
 }
 
+function showVoteBtn() {
+    vote_btn.style.display = "block";
+    email_input.style.display = "none";
+    send_email_btn.style.display = "none";
+    send_again_btn.style.display = "none";
+}
+
 function checkCookie() {
     if (
         !document.cookie ||
@@ -119,28 +148,6 @@ function checkCookie() {
     return true;
 }
 
-function makeValidateRequest() {
-    fetch(
-        'validate',
-        {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'Content-Type:text/html'
-            },
-        }
-    )
-}
-
-
-function start() {
-    setEventHandlers();
-
-    if (checkCookie()) {
-        makeValidateRequest();
-    }
-}
-
-// --------------------------------------------------------------
 function sendEmail() {
     fetch(
         'auth',
@@ -156,7 +163,6 @@ function sendEmail() {
     )
         .then(response => response.json())
         .then(data => {
-            // console.log("data = ", data);
             if (codeAction[data["errorCode"]]) {
                 codeAction[data["errorCode"]]["action"](data["msg"], data["status"], data["data"]);
             }
@@ -165,6 +171,35 @@ function sendEmail() {
             console.error(error);
         })
 
+}
+
+function makeValidateRequest() {
+    fetch(
+        'validate',
+        {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'Content-Type:text/html'
+            },
+        }
+    )
+        .then(response => response.json())
+        .then(data => {
+            if (codeAction[data["errorCode"]]) {
+                codeAction[data["errorCode"]]["action"](data["msg"], data["status"], data["data"]);
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        })
+}
+
+function start() {
+    setEventHandlers();
+
+    if (checkCookie()) {
+        makeValidateRequest();
+    }
 }
 
 start();
