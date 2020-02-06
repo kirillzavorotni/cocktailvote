@@ -57,5 +57,6 @@ class EmailModel
     private function sendEmail(String $mailText)
     {
 //        var_dump($this->data);
+//        echo $mailText;
     }
 }

@@ -25,17 +25,18 @@ class UserModel extends CommonModel
             $this->sendConfirmEmail($this->createdRecord);
         }
 
+        if (!$this->getConfirmedStatusFromUser($user)) {
+            $this->sendConfirmEmail($user);
+        }
 
-//        $usrs = R::dispense('user');
-//        var_dump($usrs);
-//        $vote = R::load('vote', 5);
-//        $usrs = $vote->sharedProductList;
-//        var_dump($usrs);
-//        $product = $result->fetchAs('')
+        $votesLeft = $this->additional_conf["allowVoteCount"] - $this->getLeftVoteCount($user);
 
-        $category = R::load('product', 9);
-        $numBook = $category->countOwn('vote');
-        var_dump($numBook);
+        CommonController::sendJSONResponse(
+            true,
+            "200",
+            "sa",
+            ["voteCount" => $votesLeft >= 0 ? $votesLeft : 0]
+        );
     }
 
 
@@ -50,6 +51,24 @@ class UserModel extends CommonModel
     {
         $user = R::findOne('user', ' email = ? ', [$this->data["email"]]);
         return $user ? $user : null;
+    }
+
+    /**
+     * @param \RedBeanPHP\OODBBean $user
+     * @return bool|mixed
+     */
+    private function getConfirmedStatusFromUser(\RedBeanPHP\OODBBean $user): bool
+    {
+        return $user['confirm_status'] ? $user['confirm_status'] : false;
+    }
+
+    /**
+     * @param \RedBeanPHP\OODBBean $user
+     * @return int
+     */
+    private function getLeftVoteCount(\RedBeanPHP\OODBBean $user): int
+    {
+        return R::count( 'vote', 'user_id = ?', [$user["id"]]);
     }
 
 

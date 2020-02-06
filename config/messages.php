@@ -11,7 +11,8 @@ return [
         'nfd' => "Not Found" // Not found
     ],
     "200" => [
-        'cem' => "We have send you confirm email, please do it" // Confirm email message
+        'cem' => "We have send you confirm email, please do it", // Confirm email message
+        'sa' => "Successful authorization", // Successful authorization
     ],
     "500" => [
         'cncu' => "Internal error. Try again later" // Can't to create user

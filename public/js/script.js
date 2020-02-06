@@ -4,6 +4,10 @@ const send_email_btn = document.querySelector('#send_btn_id');
 const vote_btn = document.querySelector('#vote_btn_id');
 const send_again_btn = document.querySelector('#send_again_btn_id');
 
+const additionalMessages = {
+  "emailAgain": "Enter email again"
+};
+
 const codeAction = {
     /**
      * Confirm email message
@@ -12,9 +16,7 @@ const codeAction = {
         status: true,
         action: (msg, status) => {
             if (status) {
-                email_input.style.display = "none";
-                send_email_btn.style.display = "none";
-                send_again_btn.style.display = "block";
+                showSendAgainBtn();
                 if (msg) {
                     product.innerHTML = msg;
                     return;
@@ -49,14 +51,61 @@ const codeAction = {
                 product.innerHTML = "";
             }
         }
+    },
+    "sa": {
+        status: true,
+        action: (msg, status, data) => {
+            if (status) {
+                if (data["voteCount"]) {
+                    product.innerHTML = `You have ${data["voteCount"]} votes`;
+
+                } else {
+                    product.innerHTML = "You don't have votes";
+                }
+                hideAllControl();
+            }
+        }
     }
 };
 
 
 function setEventHandlers() {
     send_email_btn.addEventListener('click', sendEmail);
+    send_again_btn.addEventListener('click', resetEmail)
 }
 
+function resetEmail() {
+    resetCookie();
+    showAllControl();
+    hideSendAgainBtn();
+}
+
+function resetCookie() {
+    document.cookie = "id=; expires=Thu, 01 Jan 1970 00:00:01 GMT";
+}
+
+function showAllControl() {
+    email_input.style.display = "block";
+    send_email_btn.style.display = "block";
+    send_again_btn.style.display = "block";
+}
+
+function hideAllControl() {
+    email_input.style.display = "none";
+    send_email_btn.style.display = "none";
+    send_again_btn.style.display = "none";
+}
+
+function hideSendAgainBtn() {
+    send_again_btn.style.display = "none";
+    product.innerHTML = additionalMessages.emailAgain;
+}
+
+function showSendAgainBtn() {
+    email_input.style.display = "none";
+    send_email_btn.style.display = "none";
+    send_again_btn.style.display = "block";
+}
 
 function checkCookie() {
     if (
@@ -109,7 +158,7 @@ function sendEmail() {
         .then(data => {
             // console.log("data = ", data);
             if (codeAction[data["errorCode"]]) {
-                codeAction[data["errorCode"]]["action"](data["msg"], data["status"]);
+                codeAction[data["errorCode"]]["action"](data["msg"], data["status"], data["data"]);
             }
         })
         .catch(error => {
