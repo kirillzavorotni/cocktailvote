@@ -56,4 +56,12 @@ class CommonModel
     {
         return R::count( 'vote', 'user_id = ?', [$user["id"]]);
     }
+
+    /**
+     * @return NULL|\RedBeanPHP\OODBBean
+     */
+    protected function findUserByCookie()
+    {
+        return R::findOne('user', 'cookie_hash = ?', [$_COOKIE["id"]]);
+    }
 }

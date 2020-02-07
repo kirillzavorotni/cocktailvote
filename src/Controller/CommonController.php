@@ -52,12 +52,12 @@ class CommonController
     }
 
 
-    static public function sendJSONResponse(Bool $status, String $code, String $errCode, Array $data = [], String $cookieId = null, Bool $changeCookie = true)
+    static public function sendJSONResponse(Bool $status, String $code, String $msgCode, Array $data = [], String $cookieId = null, Bool $changeCookie = true)
     {
         $res = json_encode([
             "status" => $status,
-            "errorCode" => $errCode,
-            "msg" => self::getResponseMessage($code, $errCode),
+            "msgCode" => $msgCode,
+            "msg" => self::getResponseMessage($code, $msgCode),
             "data" => $data
         ]);
 
@@ -73,20 +73,32 @@ class CommonController
     static public function setCookie($cookieId = null, $changeCookie = true)
     {
         if (!isset($cookieId) && $changeCookie) {
-            setcookie("id", "", time() - 3600*24*365*10, "/");
+            setcookie("id", "", time() - 3600 * 24 * 365 * 10, "/");
         }
 
         if (isset($cookieId)) {
-            setcookie("id", $cookieId, time() + 3600*24*365*10, "/");
+            setcookie("id", $cookieId, time() + 3600 * 24 * 365 * 10, "/");
         }
     }
 
     /**
      * @return bool
      */
-    static public function isCookieRequestValidate()
+    static public function isCookieRequestValidate(): bool
     {
         if (isset($_COOKIE) && isset($_COOKIE["id"]) && strlen($_COOKIE["id"]) > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @param $data
+     * @return bool
+     */
+    static public function isVoteDataRequestValidate($data): bool
+    {
+        if (isset($data) && count($data) === 1 && isset($data["product_id"])) {
             return true;
         }
         return false;

@@ -17,6 +17,9 @@ class AuthController extends CommonController
         $user->init($data);
     }
 
+    /**
+     * @throws NotFoundException
+     */
     public function validateAction()
     {
         if (!CommonController::isCookieRequestValidate()) {

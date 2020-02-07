@@ -12,7 +12,6 @@ class DefaultController extends CommonController
 
     public function indexAction()
     {
-//        setcookie("id", hash("sha256", "qwerty"), time() + 1500, "/");
         echo $this->html;
     }
 }

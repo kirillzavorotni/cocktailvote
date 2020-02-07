@@ -65,10 +65,11 @@ const codeAction = {
                 if (data["voteCount"]) {
                     product.innerHTML = `You have ${data["voteCount"]} votes`;
                     showVoteBtn();
-                } else {
+                }
+                if (!data["voteCount"]) {
+                    hideAllControl();
                     product.innerHTML = "You don't have votes";
                 }
-                hideAllControl();
             }
         }
     },
@@ -104,12 +105,32 @@ const codeAction = {
             }
         }
     },
+    /**
+     * Vote is taken
+     */
+    "vit": {
+        status: true,
+        action: (msg, status, data) => {
+            if (status) {
+                if (msg && !data["voteCount"]) {
+                    product.innerHTML = `${msg}. You ran out of votes`;
+                    hideAllControl();
+                    return;
+                }
+
+                if (msg && data["voteCount"]) {
+                    product.innerHTML = `${msg}. Now you have ${data["voteCount"]} votes`;
+                }
+            }
+        }
+    },
 };
 
 
 function setEventHandlers() {
     send_email_btn.addEventListener('click', sendEmail);
-    send_again_btn.addEventListener('click', resetEmail)
+    send_again_btn.addEventListener('click', resetEmail);
+    vote_btn.addEventListener("click", addVoteRequest);
 }
 
 function resetEmail() {
@@ -143,7 +164,9 @@ function hideSendAgainBtn() {
 function showSendAgainBtn() {
     email_input.style.display = "none";
     send_email_btn.style.display = "none";
+    vote_btn.style.display = "none";
     send_again_btn.style.display = "block";
+
 }
 
 function showVoteBtn() {
@@ -180,8 +203,8 @@ function sendEmail() {
     )
         .then(response => response.json())
         .then(data => {
-            if (codeAction[data["errorCode"]]) {
-                codeAction[data["errorCode"]]["action"](data["msg"], data["status"], data["data"]);
+            if (codeAction[data["msgCode"]]) {
+                codeAction[data["msgCode"]]["action"](data["msg"], data["status"], data["data"]);
             }
         })
         .catch(error => {
@@ -202,8 +225,32 @@ function makeValidateRequest() {
     )
         .then(response => response.json())
         .then(data => {
-            if (codeAction[data["errorCode"]]) {
-                codeAction[data["errorCode"]]["action"](data["msg"], data["status"], data["data"]);
+            if (codeAction[data["msgCode"]]) {
+                codeAction[data["msgCode"]]["action"](data["msg"], data["status"], data["data"]);
+            }
+        })
+        .catch(error => {
+            console.error(error);
+        })
+}
+
+function addVoteRequest() {
+    fetch(
+        'vote',
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({
+                product_id: "11"
+            })
+        }
+    )
+        .then(response => response.json())
+        .then(data => {
+            if (codeAction[data["msgCode"]]) {
+                codeAction[data["msgCode"]]["action"](data["msg"], data["status"], data["data"]);
             }
         })
         .catch(error => {

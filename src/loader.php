@@ -21,3 +21,4 @@ require_once '../src/Model/CommonModel.php';
 require_once '../src/Model/UserModel.php';
 require_once '../src/Model/ValidateModel.php';
 require_once '../src/Model/EmailModel.php';
+require_once '../src/Model/VoteModel.php';
