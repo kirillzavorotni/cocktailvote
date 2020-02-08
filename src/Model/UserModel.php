@@ -97,6 +97,10 @@ class UserModel extends CommonModel
     /////////   Send confirm email   /////////
     //////////////////////////////////////////
 
+    /**
+     * @param \RedBeanPHP\OODBBean $recordData
+     * @throws NotFoundException
+     */
     private function sendConfirmEmail(\RedBeanPHP\OODBBean $recordData)
     {
         $emailClass = new EmailModel();

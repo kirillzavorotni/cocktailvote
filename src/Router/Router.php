@@ -6,7 +6,6 @@ class Router
 {
 
     private $routes;
-    private $db_conf;
 
     public function __construct()
     {

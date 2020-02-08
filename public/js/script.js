@@ -123,9 +123,8 @@ const codeAction = {
                 }
             }
         }
-    },
+    }
 };
-
 
 function setEventHandlers() {
     send_email_btn.addEventListener('click', sendEmail);

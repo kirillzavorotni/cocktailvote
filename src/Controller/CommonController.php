@@ -51,8 +51,16 @@ class CommonController
         return self::$messages[$code][$errCode];
     }
 
-
-    static public function sendJSONResponse(Bool $status, String $code, String $msgCode, Array $data = [], String $cookieId = null, Bool $changeCookie = true)
+    /**
+     * @param bool $status
+     * @param String $code
+     * @param String $msgCode
+     * @param array $data
+     * @param String|null $cookieId
+     * @param bool $changeCookie
+     * @param bool $isExit
+     */
+    static public function sendJSONResponse(Bool $status, String $code, String $msgCode, Array $data = [], String $cookieId = null, Bool $changeCookie = true, $isExit = true)
     {
         $res = json_encode([
             "status" => $status,
@@ -66,8 +74,12 @@ class CommonController
         header("Content-type: application/json; charset=UTF-8");
         header("Content-Length: " . strlen($res));
         http_response_code($code);
+
         echo $res;
-        die;
+
+        if ($isExit) {
+            exit;
+        }
     }
 
     static public function setCookie($cookieId = null, $changeCookie = true)
@@ -79,6 +91,31 @@ class CommonController
         if (isset($cookieId)) {
             setcookie("id", $cookieId, time() + 3600 * 24 * 365 * 10, "/");
         }
+    }
+
+
+    /**
+     * @return string|null
+     */
+    static public function checkGetActivateToken()
+    {
+        if (
+            explode('/activate?', $_SERVER['REQUEST_URI'])[1] &&
+            is_array(explode("=", explode('/activate?', $_SERVER['REQUEST_URI'])[1])) &&
+            count(explode("=", explode('/activate?', $_SERVER['REQUEST_URI'])[1])) == 2
+        ) {
+
+            list($name, $value) = explode(
+                "=",
+                explode('/activate?', $_SERVER['REQUEST_URI'])[1]
+            );
+
+            if (isset($name) && isset($value) && $name === "token" && strlen($value) > 0) {
+                return $value;
+            }
+        }
+
+        return null;
     }
 
     /**

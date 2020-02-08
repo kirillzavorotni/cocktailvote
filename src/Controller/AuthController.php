@@ -30,4 +30,17 @@ class AuthController extends CommonController
         $validate = new ValidateModel();
         $validate->init();
     }
+
+    public function activateAction()
+    {
+        $activateToken = CommonController::checkGetActivateToken();
+
+        if (!$activateToken) {
+            header('Location: ' . $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['HTTP_HOST']);
+            exit;
+        }
+
+        $activate = new ActivateModel();
+        $activate->init($activateToken);
+    }
 }

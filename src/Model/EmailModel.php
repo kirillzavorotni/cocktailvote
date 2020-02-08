@@ -11,7 +11,10 @@ class EmailModel
         $this->messageConfig = include "../config/confirmMessageConfig.php";
     }
 
-
+    /**
+     * @param \RedBeanPHP\OODBBean $data
+     * @throws NotFoundException
+     */
     public function init(\RedBeanPHP\OODBBean $data)
     {
         $this->data = $data;
