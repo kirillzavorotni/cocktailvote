@@ -23,11 +23,7 @@ class EmailModel
 
     private function prepareSending()
     {
-//        if (!isset($_SERVER["HTTP_HOST"])) {
-//            throw new NotFoundException();
-//        }
-
-        $httpDomain = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['HTTP_HOST'] . "/";
+        $httpDomain = "http://" . $_SERVER['HTTP_HOST'] . "/";
         $activateLink = $this->getActivateLink($httpDomain);
         $messageTemplate = $this->getMessageTemplate($activateLink);
 
@@ -56,7 +52,24 @@ class EmailModel
      */
     private function getMessageTemplate(String $linktext): string
     {
-        return $this->messageConfig["message"] . "<br><br>" . "<a href='" . $linktext . "'>Click here</a>" ;
+        $template = "
+            <!DOCTYPE html>
+            <html lang=\"en\">
+            <head>
+                <meta charset=\"UTF-8\">
+                <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
+                <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">
+                <title>Confirm email</title>
+            </head>
+            <body>
+                Please, click on confirm link below.
+                <br/>
+                <br/>
+                <a href=\"{$linktext}\">{$linktext }</a>
+            </body>
+            </html>";
+
+        return $template;
     }
 
 

@@ -26,9 +26,6 @@ class MallerService
      */
     public function send($to, $content)
     {
-
-        var_dump($content);
-        die;
         try {
             $this->mail->SMTPDebug = false;
             $this->mail->isSMTP();
