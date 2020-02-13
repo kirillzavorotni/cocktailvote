@@ -63,7 +63,7 @@ class EmailModel
 
     private function sendEmail(String $mailText)
     {
-//        var_dump($this->data);
-//        echo $mailText;
+        $email = new MallerService();
+        $email->send($this->data["email"], $mailText);
     }
 }

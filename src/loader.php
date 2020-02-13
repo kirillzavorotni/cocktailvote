@@ -23,3 +23,6 @@ require_once '../src/Model/ValidateModel.php';
 require_once '../src/Model/EmailModel.php';
 require_once '../src/Model/VoteModel.php';
 require_once '../src/Model/ActivateModel.php';
+
+// Mailer
+require '../src/Service/MallerService.php';

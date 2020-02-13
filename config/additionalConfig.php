@@ -1,5 +1,5 @@
 <?php
 
 return [
-    "allowVoteCount" => 10,
+    "allowVoteCount" => 3,
 ];
