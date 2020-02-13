@@ -23,11 +23,11 @@ class EmailModel
 
     private function prepareSending()
     {
-        if (!isset($_SERVER["HTTP_REFERER"])) {
-            throw new NotFoundException();
-        }
+//        if (!isset($_SERVER["HTTP_HOST"])) {
+//            throw new NotFoundException();
+//        }
 
-        $httpDomain = $_SERVER["HTTP_REFERER"];
+        $httpDomain = $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['HTTP_HOST'] . "/";
         $activateLink = $this->getActivateLink($httpDomain);
         $messageTemplate = $this->getMessageTemplate($activateLink);
 
