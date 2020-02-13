@@ -21,7 +21,7 @@ class ActivateModel extends CommonModel
         $this->user = $this->findUserByTokenInBD();
 
         if (!$this->user) {
-            header('Location: ' . $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['HTTP_HOST']);
+            header('Location: http://' . $_SERVER['HTTP_HOST']);
             exit;
         }
 
