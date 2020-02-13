@@ -242,7 +242,7 @@ function addVoteRequest() {
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify({
-                product_id: "11"
+                product_id: "1"
             })
         }
     )
