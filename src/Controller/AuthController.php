@@ -33,10 +33,6 @@ class AuthController extends CommonController
 
     public function activateAction()
     {
-
-//        var_dump('Location: http://' . $_SERVER['HTTP_HOST']);
-//        die;
-
         $activateToken = CommonController::checkGetActivateToken();
 
         if (!$activateToken) {

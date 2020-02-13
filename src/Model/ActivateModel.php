@@ -65,6 +65,6 @@ class ActivateModel extends CommonModel
             false
         );
 
-        header('Location: ' . $_SERVER['REQUEST_SCHEME'] . "://" . $_SERVER['HTTP_HOST']);
+        header('Location: http://' . $_SERVER['HTTP_HOST']);
     }
 }
