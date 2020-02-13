@@ -26,8 +26,10 @@ class MallerService
      */
     public function send($to, $content)
     {
+
+        var_dump($content);
+        die;
         try {
-            //Server settings
             $this->mail->SMTPDebug = false;
             $this->mail->isSMTP();
             $this->mail->Host       = 'smtp.spaceweb.ru';
@@ -49,7 +51,7 @@ class MallerService
             $this->mail->send();
 
         } catch (Exception $e) {
-//            var_dump($e->getMessage());
+            var_dump($e->getMessage());
         }
     }
 
