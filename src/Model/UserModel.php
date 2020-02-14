@@ -11,6 +11,10 @@ class UserModel extends CommonModel
         parent::__construct();
     }
 
+    /**
+     * @param array $data
+     * @throws NotFoundException
+     */
     public function init(Array $data)
     {
         $this->data = $data;

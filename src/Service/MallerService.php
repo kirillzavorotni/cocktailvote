@@ -48,7 +48,13 @@ class MallerService
             $this->mail->send();
 
         } catch (Exception $e) {
-//            var_dump($e->getMessage());
+
+            CommonController::sendJSONResponse(
+                false,
+                "501",
+                "end"
+            );
+
         }
     }
 

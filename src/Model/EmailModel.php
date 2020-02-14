@@ -1,7 +1,7 @@
 <?php
 
 
-class EmailModel
+class EmailModel extends CommonModel
 {
     private $data;
     private $messageConfig;
@@ -23,7 +23,7 @@ class EmailModel
 
     private function prepareSending()
     {
-        $httpDomain = "http://" . $_SERVER['HTTP_HOST'] . "/";
+        $httpDomain = $this->additional_conf["protocol"] . "://" . $_SERVER['HTTP_HOST'] . "/";
         $activateLink = $this->getActivateLink($httpDomain);
         $messageTemplate = $this->getMessageTemplate($activateLink);
 

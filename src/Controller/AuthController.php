@@ -3,6 +3,14 @@
 
 class AuthController extends CommonController
 {
+
+    private $additional_conf;
+
+    public function __construct()
+    {
+        $this->additional_conf = include "../config/additionalConfig.php";
+    }
+
     /**
      * file messages.php contains (errCode, code) messages for response
      */
@@ -33,10 +41,11 @@ class AuthController extends CommonController
 
     public function activateAction()
     {
+
         $activateToken = CommonController::checkGetActivateToken();
 
         if (!$activateToken) {
-            header('Location: http://' . $_SERVER['HTTP_HOST']);
+            header('Location: ' . $this->additional_conf["protocol"] . '://' . $_SERVER['HTTP_HOST']);
             exit;
         }
 

@@ -19,5 +19,8 @@ return [
     ],
     "500" => [
         'cncu' => "Internal error. Try again later" // Can't to create user
+    ],
+    "501" => [
+        'end' => "Email wasn't delivery" // Email wasn't delivery
     ]
 ];

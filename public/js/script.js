@@ -123,6 +123,19 @@ const codeAction = {
                 }
             }
         }
+    },
+    "end": {
+        status: false,
+        action: (msg, status) => {
+            if (!status) {
+                resetEmail();
+                if (msg) {
+                    product.innerHTML = msg;
+                    return;
+                }
+                product.innerHTML = "";
+            }
+        }
     }
 };
 
@@ -242,7 +255,7 @@ function addVoteRequest() {
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify({
-                product_id: "1"
+                product_id: "7"
             })
         }
     )
