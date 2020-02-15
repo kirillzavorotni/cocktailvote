@@ -5,10 +5,12 @@ class EmailModel extends CommonModel
 {
     private $data;
     private $messageConfig;
+//    private $messageTemplate;
 
     public function __construct()
     {
         $this->messageConfig = include "../config/confirmMessageConfig.php";
+//        $this->messageTemplate = include "../public/templates/emailTemplate.php";
     }
 
     /**
@@ -23,9 +25,12 @@ class EmailModel extends CommonModel
 
     private function prepareSending()
     {
-        $httpDomain = $this->additional_conf["protocol"] . "://" . $_SERVER['HTTP_HOST'] . "/";
+//        $httpDomain = $this->additional_conf["protocol"] . "://" . $_SERVER['HTTP_HOST'] . "/";
+        $httpDomain = "http://" . $_SERVER['HTTP_HOST'] . "/";
         $activateLink = $this->getActivateLink($httpDomain);
         $messageTemplate = $this->getMessageTemplate($activateLink);
+//        var_dump($messageTemplate);
+//        die;
 
         $this->sendEmail($messageTemplate);
 
@@ -52,6 +57,7 @@ class EmailModel extends CommonModel
      */
     private function getMessageTemplate(String $linktext): string
     {
+
         $template = "
             <!DOCTYPE html>
             <html lang=\"en\">
@@ -70,6 +76,7 @@ class EmailModel extends CommonModel
             </html>";
 
         return $template;
+
     }
 
 

@@ -1,23 +1,425 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Voter</title>
-    <link rel="stylesheet" href="./css/style.css">
-</head>
-<body>
-    <div class="product"></div>
-    <div id="form_wrap">
-        <input id="email_id" type="text">
-        <button id="send_btn_id">Send</button>
-    </div>
-    <div id="vote_btn_wrap">
-        <button id="vote_btn_id" style="display:none">Vote</button>
-    </div>
-    <div id="send_again_btn_wrap">
-        <button id="send_again_btn_id" style="display:none">Send email again </button>
-    </div>
+<html lang="ru">
 
-    <script src="./js/script.js"></script>
+<head>
+
+	<meta charset="utf-8">
+
+	<title>Margarita Day / 22 febryary</title>
+	<meta name="description" content="22 февраля - международный день коктейля Маргарита">
+
+	<meta name="viewport" content="width=device-width">
+
+	<link rel="icon" href="img/favicon.png">
+	<meta property="og:image" content="img/@1x/preview.jpg">
+
+	<meta name="theme-color" content="#4ab8dc">
+
+	<link rel="stylesheet" href="css/magnific.css">
+	<link rel="stylesheet" href="css/styles.min.css">
+
+
+</head>
+
+<body>
+
+	<header>
+		<div class="container">
+			<div class="title">
+				<h1>Margarita<br>week</h1>
+				<p>12-22<br>february</p>
+			</div>
+			<div class="product_logo">
+				<img src="img/olmeca_logo_white.png" alt="olmeca_logo">
+				<img src="img/altos_logo_white.png" alt="altos_logo">
+			</div>
+		</div>
+	</header>
+
+	<section class="bars">
+		<div class="container">
+
+			<div class="description">
+				<div class="text_container">
+					<h2>
+						MARGARITA COCKTAIL
+					</h2>
+					<div class="line"></div>
+					<p>Наиболее известный и популярный коктейль на основе текилы, и, возможно, один из самых первых таких коктейлей. Известен он ещё и легендой своего создания. А точнее несколькими официальными и десятками неофициальных историй создания этого коктейля. И никто не может сказать точно в каком году он был создан. Точно мы можем сказать лишь то, что лучшие твисты от белорусских барменов можно попробовать в нашем городе с 15 по 22 февраля!</p>
+					<p>Ты можешь проголосовать за лучший авторский коктейль уже сейчас!</p>
+				</div>
+			</div>
+
+			<div class="bar1 vote">
+				<div class="bars_content">
+					<img src="img/elpushka.png" alt="el_pushka_logotype">
+					<p>ул. Герцена 12</p>
+				</div>
+				<a class="popup-with-form" href="#elpushka">проголосовать</a>
+			</div>
+
+			<form id="elpushka" data-id="1" class="mfp-hide white-popup-block">
+				<fieldset>
+					<ol>
+						<li class="loader_wrap">
+							<div class="loader"></div>
+						</li>
+						<li class="vote_form">
+							<p>Мой выбор <span>Бар El Pushka</span></p>
+						</li>
+						<li class="vote_form left_vote_wrap">
+							<p>Осталось голосов: <span class="left_vote_count"></span></p>
+						</li>
+						<li class="vote_form ajax_msg_wrap">
+							<p><span class="ajax_msg_text"></span></p>
+						</li>
+						<li class="vote_form email_wrap">
+							<label for="email"></label>
+							<input name="email" type="email" class="emailInput" placeholder="Введите Ваш Email" required="">
+						</li>
+						<li class="vote_form check_box_wrap">
+							<label class="form_container">Мне исполнилось 18 лет, я согласен с <a href="#">условиями</a> акции
+							<br>
+						  <input type="checkbox" class="checkbox">
+						</label>
+						</li>
+						<li class="vote_form email_btn_wrap">
+							<button type="submit" disabled="true" name="submit" class="email_btn">отправить email</button>
+						</li>
+						<li class="vote_form send_again_email_wrap">
+							<button class="send_again_email_btn">отправить email еще раз</button>
+						</li>
+						<li class="vote_form vote_btn_wrap">
+							<button class="vote_btn">проголосовать</button>
+						</li>
+					</ol>
+				</fieldset>
+			</form>
+
+			<div class="bar2 vote">
+				<div class="bars_content">
+					<img src="img/bardot21.png" alt="bar_dot_logotype" style="padding-top: 50px;">
+					<p>пр-т. Победителей 9</p>
+				</div>
+				<a class="popup-with-form" href="#bardot">проголосовать</a>
+			</div>
+
+			<form id="bardot" data-id="3" class="mfp-hide white-popup-block">
+				<fieldset>
+					<ol>
+						<li class="loader_wrap">
+							<div class="loader"></div>
+						</li>
+						<li class="vote_form">
+							<p>Мой выбор <span>BAR:DOT XX1</span></p>
+						</li>
+						<li class="vote_form left_vote_wrap">
+							<p>Осталось голосов: <span class="left_vote_count"></span></p>
+						</li>
+						<li class="vote_form ajax_msg_wrap">
+							<p><span class="ajax_msg_text"></span></p>
+						</li>
+						<li class="vote_form email_wrap">
+							<label for="email"></label>
+							<input name="email" type="email" class="emailInput" placeholder="Введите Ваш Email" required="">
+						</li>
+						<li class="vote_form check_box_wrap">
+							<label class="form_container">Мне исполнилось 18 лет, я согласен с <a href="#">условиями</a> акции
+							<br>
+							<input type="checkbox" class="checkbox">
+						</label>
+						</li>
+						<li class="vote_form email_btn_wrap">
+							<button type="submit" disabled="true" name="submit" class="email_btn">отправить email</button>
+						</li>
+						<li class="vote_form send_again_email_wrap">
+							<button class="send_again_email_btn">отправить email еще раз</button>
+						</li>
+						<li class="vote_form vote_btn_wrap">
+							<button class="vote_btn">проголосовать</button>
+						</li>
+					</ol>
+				</fieldset>
+			</form>
+
+			<div class="bar3 vote">
+				<div class="bars_content">
+					<img src="img/buttler_logo.png" alt="buttler_bar_logotype" style="padding-top: 100px;">
+					<p>ул. Герцена 4</p>
+				</div>
+				<a class="popup-with-form" href="#buttler">проголосовать</a>
+			</div>
+
+			<form id="buttler" data-id="4" class="mfp-hide white-popup-block">
+				<fieldset>
+					<ol>
+						<li class="loader_wrap">
+							<div class="loader"></div>
+						</li>
+						<li class="vote_form">
+							<p>Мой выбор <span>Бар Butler</span></p>
+						</li>
+						<li class="vote_form left_vote_wrap">
+							<p>Осталось голосов: <span class="left_vote_count"></span></p>
+						</li>
+						<li class="vote_form ajax_msg_wrap">
+							<p><span class="ajax_msg_text"></span></p>
+						</li>
+						<li class="vote_form email_wrap">
+							<label for="email"></label>
+							<input name="email" type="email" class="emailInput" placeholder="Введите Ваш Email" required="">
+						</li>
+						<li class="vote_form check_box_wrap">
+							<label class="form_container">Мне исполнилось 18 лет, я согласен с <a href="#">условиями</a> акции
+							<br>
+							<input type="checkbox" class="checkbox">
+						</label>
+						</li>
+						<li class="vote_form email_btn_wrap">
+							<button type="submit" disabled="true" name="submit" class="email_btn">отправить email</button>
+						</li>
+						<li class="vote_form send_again_email_wrap">
+							<button class="send_again_email_btn">отправить email еще раз</button>
+						</li>
+						<li class="vote_form vote_btn_wrap">
+							<button class="vote_btn">проголосовать</button>
+						</li>
+					</ol>
+				</fieldset>
+			</form>
+
+			<div class="bar4 vote">
+				<div class="bars_content">
+					<img src="img/DNO.png" alt="">
+					<p>ул. Зыбицкая 6</p>
+				</div>
+				<a class="popup-with-form" href="#dno">проголосовать</a>
+			</div>
+
+			<form id="dno" data-id="5" class="mfp-hide white-popup-block">
+				<fieldset>
+					<ol>
+						<li class="loader_wrap">
+							<div class="loader"></div>
+						</li>
+						<li class="vote_form">
+							<p>Мой выбор <span>Бар ДНО</span></p>
+						</li>
+						<li class="vote_form left_vote_wrap">
+							<p>Осталось голосов: <span class="left_vote_count"></span></p>
+						</li>
+						<li class="vote_form ajax_msg_wrap">
+							<p><span class="ajax_msg_text"></span></p>
+						</li>
+						<li class="vote_form email_wrap">
+							<label for="email"></label>
+							<input name="email" type="email" class="emailInput" placeholder="Введите Ваш Email" required="">
+						</li>
+						<li class="vote_form check_box_wrap">
+							<label class="form_container">Мне исполнилось 18 лет, я согласен с <a href="#">условиями</a> акции
+							<br>
+							<input type="checkbox" class="checkbox">
+						</label>
+						</li>
+						<li class="vote_form email_btn_wrap">
+							<button type="submit" disabled="true" name="submit" class="email_btn">отправить email</button>
+						</li>
+						<li class="vote_form send_again_email_wrap">
+							<button class="send_again_email_btn">отправить email еще раз</button>
+						</li>
+						<li class="vote_form vote_btn_wrap">
+							<button class="vote_btn">проголосовать</button>
+						</li>
+					</ol>
+				</fieldset>
+			</form>
+
+			<div class="bar5 vote">
+				<div class="bars_content">
+					<img src="img/GC.svg" alt="Golden_Coffee_logotype" style="padding-top: 100px;">
+					<p>ул. М.Богдановича 26</p>
+				</div>
+				<a class="popup-with-form" href="#GC">проголосовать</a>
+			</div>
+
+			<form id="GC" data-id="7" class="mfp-hide white-popup-block">
+				<fieldset>
+					<ol>
+						<li class="loader_wrap">
+							<div class="loader"></div>
+						</li>
+						<li class="vote_form">
+							<p>Мой выбор <span>Бар Golden Coffee</span></p>
+						</li>
+						<li class="vote_form left_vote_wrap">
+							<p>Осталось голосов: <span class="left_vote_count"></span></p>
+						</li>
+						<li class="vote_form ajax_msg_wrap">
+							<p><span class="ajax_msg_text"></span></p>
+						</li>
+						<li class="vote_form email_wrap">
+							<label for="email"></label>
+							<input name="email" type="email" class="emailInput" placeholder="Введите Ваш Email" required="">
+						</li>
+						<li class="vote_form check_box_wrap">
+							<label class="form_container">Мне исполнилось 18 лет, я согласен с <a href="#">условиями</a> акции
+							<br>
+							<input type="checkbox" class="checkbox">
+						</label>
+						</li>
+						<li class="vote_form email_btn_wrap">
+							<button type="submit" disabled="true" name="submit" class="email_btn">отправить email</button>
+						</li>
+						<li class="vote_form send_again_email_wrap">
+							<button class="send_again_email_btn">отправить email еще раз</button>
+						</li>
+						<li class="vote_form vote_btn_wrap">
+							<button class="vote_btn">проголосовать</button>
+						</li>
+					</ol>
+				</fieldset>
+			</form>
+
+			<div class="bar6 vote">
+				<div class="bars_content">
+					<img src="img/hp_winner.svg" alt="hp_winners_bar_logotype" style="padding-top: 120px;">
+					<p>пр-т. Победителей 11</p>
+				</div>
+				<a class="popup-with-form" href="#hp_winners">проголосовать</a>
+			</div>
+
+			<form id="hp_winners" data-id="6" class="mfp-hide white-popup-block">
+				<fieldset>
+					<ol>
+						<li class="loader_wrap">
+							<div class="loader"></div>
+						</li>
+						<li class="vote_form">
+							<p>Мой выбор <span>Бар HP Winners</span></p>
+						</li>
+						<li class="vote_form left_vote_wrap">
+							<p>Осталось голосов: <span class="left_vote_count"></span></p>
+						</li>
+						<li class="vote_form ajax_msg_wrap">
+							<p><span class="ajax_msg_text"></span></p>
+						</li>
+						<li class="vote_form email_wrap">
+							<label for="email"></label>
+							<input name="email" type="email" class="emailInput" placeholder="Введите Ваш Email" required="">
+						</li>
+						<li class="vote_form check_box_wrap">
+							<label class="form_container">Мне исполнилось 18 лет, я согласен с <a href="#">условиями</a> акции
+							<br>
+							<input type="checkbox" class="checkbox">
+						</label>
+						</li>
+						<li class="vote_form email_btn_wrap">
+							<button type="submit" disabled="true" name="submit" class="email_btn">отправить email</button>
+						</li>
+						<li class="vote_form send_again_email_wrap">
+							<button class="send_again_email_btn">отправить email еще раз</button>
+						</li>
+						<li class="vote_form vote_btn_wrap">
+							<button class="vote_btn">проголосовать</button>
+						</li>
+					</ol>
+				</fieldset>
+			</form>
+
+			<div class="bar7 vote">
+				<div class="bars_content">
+					<img src="img/bez_bashni.svg" alt="bez_bashni_bar_logotype">
+					<p>г. Могилев ул. Первомайская 29</p>
+				</div>
+				<a class="popup-with-form" href="#bez_bashni">проголосовать</a>
+			</div>
+
+			<form id="bez_bashni" data-id="2" class="mfp-hide white-popup-block">
+				<fieldset>
+					<ol>
+						<li class="loader_wrap">
+							<div class="loader"></div>
+						</li>
+						<li class="vote_form">
+							<p>Мой выбор <span>Бар Без Башни</span></p>
+						</li>
+						<li class="vote_form left_vote_wrap">
+							<p>Осталось голосов: <span class="left_vote_count"></span></p>
+						</li>
+						<li class="vote_form ajax_msg_wrap">
+							<p><span class="ajax_msg_text"></span></p>
+						</li>
+						<li class="vote_form email_wrap">
+							<label for="email"></label>
+							<input name="email" type="email" class="emailInput" placeholder="Введите Ваш Email" required="">
+						</li>
+						<li class="vote_form check_box_wrap">
+							<label class="form_container">Мне исполнилось 18 лет, я согласен с <a href="#">условиями</a> акции
+							<br>
+							<input type="checkbox" class="checkbox">
+						</label>
+						</li>
+						<li class="vote_form email_btn_wrap">
+							<button type="submit" disabled="true" name="submit" class="email_btn">отправить email</button>
+						</li>
+						<li class="vote_form send_again_email_wrap">
+							<button class="send_again_email_btn">отправить email еще раз</button>
+						</li>
+						<li class="vote_form vote_btn_wrap">
+							<button class="vote_btn">проголосовать</button>
+						</li>
+					</ol>
+				</fieldset>
+			</form>
+
+		</div>
+	</section>
+
+	<footer>
+		<div class="container">
+			<div class="brand_footer">
+				<div class="first_brand"></div>
+				<div class="second_brand"></div>
+			</div>
+			<p>чрезмерное употребление алкоголя вредит вашему здоровью</p>
+		</div>
+	</footer>
+
+	<section class="questions">
+		<div class="question_container">
+			<div class="question_block">
+				<p>Вам уже исполнилось 18 лет?</p>
+				<div>
+					<a href="#" class="ok">Да</a>
+					<a href="https://www.youtube.com/watch?v=Cmj4lRzxIio">Нет</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="js/scripts.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('.popup-with-form').magnificPopup({
+			type: 'inline',
+			preloader: true,
+			focus: '#name',
+
+			// When elemened is focused, some mobile browsers in some cases zoom in
+			// It looks not nice, so we disable it:
+			callbacks: {
+				beforeOpen: function() {
+					if($(window).width() < 700) {
+						this.st.focus = false;
+					} else {
+						this.st.focus = '#name';
+					}
+				}
+			}
+			});
+		});
+
+	</script>
+	<script src="js/main.js"></script>
 </body>
 </html>
