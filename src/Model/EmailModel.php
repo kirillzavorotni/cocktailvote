@@ -29,8 +29,6 @@ class EmailModel extends CommonModel
         $httpDomain = "http://" . $_SERVER['HTTP_HOST'] . "/";
         $activateLink = $this->getActivateLink($httpDomain);
         $messageTemplate = $this->getMessageTemplate($activateLink);
-//        var_dump($messageTemplate);
-//        die;
 
         $this->sendEmail($messageTemplate);
 
@@ -60,15 +58,15 @@ class EmailModel extends CommonModel
 
         $template = "
             <!DOCTYPE html>
-            <html lang=\"en\">
+            <html lang=\"ru\">
             <head>
                 <meta charset=\"UTF-8\">
                 <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
                 <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">
-                <title>Confirm email</title>
+                <title>Подтверждение голосования Margaritaweek</title>
             </head>
             <body>
-                Please, click on confirm link below.
+                Спасибо что приняли участие в голосовании. Для подтверждения вашего выбора, пожалуйста, перейдите по ссылке.
                 <br/>
                 <br/>
                 <a href=\"{$linktext}\">{$linktext }</a>

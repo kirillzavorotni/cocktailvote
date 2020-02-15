@@ -1,6 +1,6 @@
 <?php
 
 return [
-    "heading" => "Confirm email",
-    "message" => "Please, click on confirm link below."
+    "heading" => "Подтверждение голосования Margaritaweek",
+    "message" => "Спасибо что приняли участие в голосовании. Для подтверждения вашего выбора, пожалуйста, перейдите по ссылке."
 ];
