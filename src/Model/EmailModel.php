@@ -1,16 +1,16 @@
 <?php
 
 
-class EmailModel extends CommonModel
+class EmailModel
 {
     private $data;
     private $messageConfig;
-//    private $messageTemplate;
+    protected $additional_conf;
 
     public function __construct()
     {
         $this->messageConfig = include "../config/confirmMessageConfig.php";
-//        $this->messageTemplate = include "../public/templates/emailTemplate.php";
+        $this->additional_conf = include "../config/additionalConfig.php";
     }
 
     /**
@@ -25,8 +25,7 @@ class EmailModel extends CommonModel
 
     private function prepareSending()
     {
-//        $httpDomain = $this->additional_conf["protocol"] . "://" . $_SERVER['HTTP_HOST'] . "/";
-        $httpDomain = "http://" . $_SERVER['HTTP_HOST'] . "/";
+        $httpDomain = $this->additional_conf["protocol"] . "://" . $_SERVER['HTTP_HOST'] . "/";
         $activateLink = $this->getActivateLink($httpDomain);
         $messageTemplate = $this->getMessageTemplate($activateLink);
 
@@ -55,29 +54,26 @@ class EmailModel extends CommonModel
      */
     private function getMessageTemplate(String $linktext): string
     {
-
-        $template = "
+        $template = '
             <!DOCTYPE html>
-            <html lang=\"ru\">
+            <html lang="ru">
             <head>
-                <meta charset=\"UTF-8\">
-                <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">
-                <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">
-                <title>Подтверждение голосования Margaritaweek</title>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                <title>' . $this->messageConfig["heading"] . '</title>
             </head>
             <body>
-                Спасибо что приняли участие в голосовании. Для подтверждения вашего выбора, пожалуйста, перейдите по ссылке.
+                ' . $this->messageConfig["message"] . '
                 <br/>
                 <br/>
-                <a href=\"{$linktext}\">{$linktext }</a>
+                <a href="' . $linktext . '">' . $linktext . '</a>
             </body>
-            </html>";
+            </html>
+        ';
 
         return $template;
-
     }
-
-
 
     private function sendEmail(String $mailText)
     {

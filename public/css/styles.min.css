@@ -724,7 +724,7 @@ form {
 
 form fieldset ol {
     text-align: center;
-    height: 300px;
+    /*height: 300px;*/
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -1071,10 +1071,18 @@ form fieldset ol li:first-child {
     display: none;
 }
 
+.email_wrap {
+    margin: 0 auto;
+}
+
 .vote_btn_wrap {
     display: none;
 }
 
-/*.email_btn_wrap {*/
-/*    display: none;*/
-/*}*/
+.send_again_email_btn, .vote_btn {
+    background-color: #12b0c9;
+}
+
+ol {
+    height: 350px;
+}

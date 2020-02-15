@@ -78,6 +78,7 @@ const codeAction = {
                 hideCheckBoxWrap();
                 hideInputEmailWrap();
                 hideSendEmailBtnWrap();
+                hideVoteBtnWrap();
                 showSendEmailAgainBtnWrap();
                 if (msg) {
                     showAjaxMsgWrap(msg);
@@ -119,11 +120,14 @@ const codeAction = {
                     hideCheckBoxWrap();
                     hideInputEmailWrap();
                     hideSendEmailBtnWrap();
-                    return;
                 }
 
                 if (msg && data["voteCount"]) {
                     showAjaxMsgWrap(`${msg}. Осталось голосов: ${data["voteCount"]}`);
+                    hideSendEmailAgainBtnWrap();
+                    hideCheckBoxWrap();
+                    hideInputEmailWrap();
+                    hideSendEmailBtnWrap();
                 }
             }
         }
@@ -156,6 +160,10 @@ const classes = {
     serverMsgWrap: "server_msg_wrap",
     popupWithForm: "popup-with-form",
     sendVoteBtn: "vote_btn"
+};
+
+const messages = {
+    incorrectEmail: "Укажите правильный Email"
 };
 
 const body = document.querySelector('body'),
@@ -216,6 +224,12 @@ function setEventHandlers() {
             e.preventDefault();
         })
     });
+
+    sendVoteBtnWrapList.forEach(item => {
+        item.addEventListener("click", (e) => {
+            e.preventDefault();
+        })
+    });
 }
 
 function sendVote(item) {
@@ -239,9 +253,23 @@ function sendEmailAgain(item) {
 function sendEmail(item) {
     if (item.classList.contains(classes.emailBtn)) {
         const email = item.closest('form').getElementsByClassName(classes.emailInput)[0].value;
+
+        if (!validateEmail(email)) {
+            showAjaxMsgWrap(messages.incorrectEmail);
+            return;
+        }
+
         hideAjaxMsgWrap();
         ajaxMail(email);
     }
+}
+
+function validateEmail(email) {
+    var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+    if(reg.test(email) == false) {
+        return false;
+    }
+    return true;
 }
 
 function changeCheckBoxState(item) {
@@ -407,15 +435,27 @@ function ajaxMail(email) {
     )
         .then(response => response.json())
         .then(data => {
+
             hideLoaderWrap();
             hideLoader();
+
+            showSendEmailBtnWrap();
+            showCheckBoxWrap();
+            showInputEmailWrap();
+
             if (codeAction[data["msgCode"]]) {
                 codeAction[data["msgCode"]]["action"](data["msg"], data["status"], data["data"]);
             }
         })
         .catch(error => {
+
             hideLoaderWrap();
             hideLoader();
+
+            showSendEmailBtnWrap();
+            showCheckBoxWrap();
+            showInputEmailWrap();
+
             console.error(error);
         })
 }
@@ -438,10 +478,14 @@ function makeValidateRequest() {
         }
     )
         .then(response => response.json())
-        .then(data => {
+        .then((data) => {
 
             hideLoaderWrap();
             hideLoader();
+
+            showSendEmailBtnWrap();
+            showCheckBoxWrap();
+            showInputEmailWrap();
 
             if (codeAction[data["msgCode"]]) {
                 codeAction[data["msgCode"]]["action"](data["msg"], data["status"], data["data"]);
@@ -451,6 +495,10 @@ function makeValidateRequest() {
 
             hideLoaderWrap();
             hideLoader();
+
+            showSendEmailBtnWrap();
+            showCheckBoxWrap();
+            showInputEmailWrap();
 
             console.error(error);
         })
@@ -463,6 +511,7 @@ function addVoteRequest(prodId) {
     hideSendEmailBtnWrap();
     hideCheckBoxWrap();
     hideInputEmailWrap();
+    hideVoteBtnWrap();
 
     fetch(
         'vote',
@@ -473,7 +522,6 @@ function addVoteRequest(prodId) {
             },
             body: JSON.stringify({
                 product_id: prodId
-                // product_id: "7"
             })
         }
     )
@@ -482,6 +530,11 @@ function addVoteRequest(prodId) {
 
             hideLoaderWrap();
             hideLoader();
+
+            showSendEmailBtnWrap();
+            showCheckBoxWrap();
+            showInputEmailWrap();
+            showVoteBtnWrap();
 
             if (codeAction[data["msgCode"]]) {
                 codeAction[data["msgCode"]]["action"](data["msg"], data["status"], data["data"]);
@@ -492,9 +545,13 @@ function addVoteRequest(prodId) {
             hideLoaderWrap();
             hideLoader();
 
+            showSendEmailBtnWrap();
+            showCheckBoxWrap();
+            showInputEmailWrap();
+            showVoteBtnWrap();
+
             console.error(error);
         })
 }
 
 ////////////////////////////////////// AJAX //////////////////////////////////////
-

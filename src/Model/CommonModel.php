@@ -11,7 +11,9 @@ class CommonModel
         $this->db_conf = include "../config/db_conf.php";
         $this->additional_conf = include "../config/additionalConfig.php";
 
-        R::setup($this->db_conf["dsn"], $this->db_conf["user"], $this->db_conf["pass"]);
+        if (!R::testConnection()) {
+            R::setup($this->db_conf["dsn"], $this->db_conf["user"], $this->db_conf["pass"]);
+        }
     }
 
     /**
