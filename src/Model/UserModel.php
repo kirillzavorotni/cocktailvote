@@ -26,11 +26,17 @@ class UserModel extends CommonModel
             if (!$this->createdRecord) {
                 CommonController::sendJSONResponse(false, "500", "cncu");
             }
-            $this->sendConfirmEmail($this->createdRecord);
+            $this->sendConfirmEmail(
+                $this->createdRecord,
+                isset($this->data["product_id"]) ? $this->data["product_id"] : null
+            );
         }
 
         if (!$this->getConfirmedStatusFromUser($user)) {
-            $this->sendConfirmEmail($user);
+            $this->sendConfirmEmail(
+                $user,
+                isset($this->data["product_id"]) ? $this->data["product_id"] : null
+            );
         }
 
         $votesLeft = $this->additional_conf["allowVoteCount"] - $this->getLeftVoteCount($user);
@@ -103,11 +109,11 @@ class UserModel extends CommonModel
 
     /**
      * @param \RedBeanPHP\OODBBean $recordData
-     * @throws NotFoundException
+     * @param $product_id
      */
-    private function sendConfirmEmail(\RedBeanPHP\OODBBean $recordData)
+    private function sendConfirmEmail(\RedBeanPHP\OODBBean $recordData, $product_id)
     {
         $emailClass = new EmailModel();
-        $emailClass->init($recordData);
+        $emailClass->init($recordData, $product_id);
     }
 }

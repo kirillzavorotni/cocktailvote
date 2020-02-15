@@ -6,6 +6,7 @@ class EmailModel
     private $data;
     private $messageConfig;
     protected $additional_conf;
+    protected $product_id;
 
     public function __construct()
     {
@@ -15,11 +16,13 @@ class EmailModel
 
     /**
      * @param \RedBeanPHP\OODBBean $data
-     * @throws NotFoundException
+     * @param $product_id
      */
-    public function init(\RedBeanPHP\OODBBean $data)
+    public function init(\RedBeanPHP\OODBBean $data, $product_id)
     {
         $this->data = $data;
+        $this->product_id = $product_id;
+
         $this->prepareSending();
     }
 
@@ -45,7 +48,10 @@ class EmailModel
      */
     private function getActivateLink(String $httpDomain): string
     {
-        return $httpDomain . "activate?token=" . $this->data["confirm_token"];
+        if (!isset($this->product_id)) {
+            return $httpDomain . "activate?token=" . $this->data["confirm_token"];
+        }
+        return $httpDomain . "activate?product_id=" . $this->product_id . "&token=" . $this->data["confirm_token"];
     }
 
     /**

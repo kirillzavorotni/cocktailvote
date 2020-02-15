@@ -1079,8 +1079,14 @@ form fieldset ol li:first-child {
     display: none;
 }
 
-.send_again_email_btn, .vote_btn {
+.vote_btn {
     background-color: #12b0c9;
+}
+
+a.send_again_email_btn {
+    color: #0056b3;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 ol {

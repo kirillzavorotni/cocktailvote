@@ -3,7 +3,7 @@
 
 class ActivateModel extends CommonModel
 {
-    private $token;
+    private $params;
     private $user;
     private $votesCount;
 
@@ -13,15 +13,15 @@ class ActivateModel extends CommonModel
     }
 
     /**
-     * @param $token
+     * @param $params
      */
-    public function init(String $token)
+    public function init(Array $params)
     {
-        $this->token = $token;
+        $this->params = $params;
         $this->user = $this->findUserByTokenInBD();
 
         if (!$this->user) {
-            header('Location: ' . $this->additional_conf["protocol"] .'://' . $_SERVER['HTTP_HOST']);
+            header('Location: ' . $this->additional_conf["protocol"] . '://' . $_SERVER['HTTP_HOST']);
             exit;
         }
 
@@ -37,7 +37,7 @@ class ActivateModel extends CommonModel
      */
     private function findUserByTokenInBD()
     {
-        $user = R::findOne('user', ' confirm_token = ? ', [$this->token]);
+        $user = R::findOne('user', ' confirm_token = ? ', [$this->params[0]]);
         return $user ? $user : null;
     }
 
@@ -55,6 +55,10 @@ class ActivateModel extends CommonModel
     {
         $this->votesCount = $this->additional_conf["allowVoteCount"] - $this->getLeftVoteCount($this->user);
 
+        if (count($this->params) == 2) {
+            $this->addVote();
+        }
+
         CommonController::sendJSONResponse(
             true,
             "200",
@@ -65,6 +69,18 @@ class ActivateModel extends CommonModel
             false
         );
 
-        header('Location: ' . $this->additional_conf["protocol"] .'://' . $_SERVER['HTTP_HOST']);
+        header('Location: ' . $this->additional_conf["protocol"] . '://' . $_SERVER['HTTP_HOST']);
+    }
+
+    private function addVote()
+    {
+
+        if ($this->votesCount > 0) {
+            $vote = R::dispense('vote');
+            $vote->user_id = $this->user["id"];
+            $vote->product_id = $this->params[1];
+            R::store($vote);
+        }
+
     }
 }

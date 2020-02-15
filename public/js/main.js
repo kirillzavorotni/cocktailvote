@@ -253,6 +253,7 @@ function sendEmailAgain(item) {
 function sendEmail(item) {
     if (item.classList.contains(classes.emailBtn)) {
         const email = item.closest('form').getElementsByClassName(classes.emailInput)[0].value;
+        const product_id = item.closest('form').getAttribute('data-id');
 
         if (!validateEmail(email)) {
             showAjaxMsgWrap(messages.incorrectEmail);
@@ -260,7 +261,7 @@ function sendEmail(item) {
         }
 
         hideAjaxMsgWrap();
-        ajaxMail(email);
+        ajaxMailProduct(email, product_id);
     }
 }
 
@@ -413,7 +414,7 @@ function enableBtn(btn) {
 
 
 ////////////////////////////////////// AJAX //////////////////////////////////////
-function ajaxMail(email) {
+function ajaxMailProduct(email, product_id) {
     showLoaderWrap();
     showLoader();
 
@@ -429,7 +430,8 @@ function ajaxMail(email) {
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify({
-                email: email
+                email: email,
+                product_id: product_id
             })
         }
     )
