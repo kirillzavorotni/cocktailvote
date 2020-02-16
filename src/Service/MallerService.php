@@ -27,6 +27,7 @@ class MallerService
     public function send($to, $content)
     {
         try {
+            $this->mail->CharSet = 'UTF-8';
             $this->mail->SMTPDebug = false;
             $this->mail->isSMTP();
             $this->mail->Host       = 'smtp.spaceweb.ru';
