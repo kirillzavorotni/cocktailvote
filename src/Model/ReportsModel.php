@@ -30,6 +30,12 @@ class ReportsModel
 
         if (isset($_POST) && isset($_POST["password"]) && $_POST["password"] === $adminPass) {
             $res = $this->makeQuery($sql);
+
+            $name  = array_column($res, 'name');
+            $voteCount = array_column($res, 'VoteCount');
+
+            array_multisort($voteCount, SORT_DESC, $name, SORT_ASC, $res);
+
             $this->CloseConnection();
         }
 
