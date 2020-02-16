@@ -8,5 +8,8 @@ return [
 
     'POST /vote' => ['VoteController', 'voteAction'],
 
-    'GET /activate' => ['AuthController', 'activateAction']
+    'GET /activate' => ['AuthController', 'activateAction'],
+
+    'GET /reports_votes' => ['ReportsController', 'getVotesReport'],
+    'POST /reports_votes' => ['ReportsController', 'getVotesReport']
 ];
