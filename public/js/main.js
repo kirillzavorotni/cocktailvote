@@ -177,7 +177,9 @@ const body = document.querySelector('body'),
     sendEmailBtnWrapList = document.querySelectorAll('.email_btn_wrap'),
     ajaxMmsgWrapList = document.querySelectorAll('.ajax_msg_wrap'),
     sendEmailAgainBtnWrapList = document.querySelectorAll('.send_again_email_wrap'),
-    sendVoteBtnWrapList = document.querySelectorAll('.vote_btn_wrap');
+    sendVoteBtnWrapList = document.querySelectorAll('.vote_btn_wrap'),
+    productNameWrap = document.querySelectorAll('.product_vote_name');
+
 
 
 start();
@@ -387,6 +389,18 @@ function hideLoaderWrap() {
     });
 }
 
+function showProductNameWrap() {
+    productNameWrap.forEach(item => {
+        item.style.display = 'block';
+    });
+}
+
+function hideProductNameWrap() {
+    productNameWrap.forEach(item => {
+        item.style.display = 'none';
+    });
+}
+
 function showLoader() {
     loader.forEach(item => {
         item.style.display = 'block';
@@ -421,6 +435,7 @@ function ajaxMailProduct(email, product_id) {
     hideSendEmailBtnWrap();
     hideCheckBoxWrap();
     hideInputEmailWrap();
+    hideProductNameWrap();
 
     fetch(
         'auth',
@@ -444,6 +459,7 @@ function ajaxMailProduct(email, product_id) {
             showSendEmailBtnWrap();
             showCheckBoxWrap();
             showInputEmailWrap();
+            showProductNameWrap();
 
             if (codeAction[data["msgCode"]]) {
                 codeAction[data["msgCode"]]["action"](data["msg"], data["status"], data["data"]);
@@ -457,6 +473,7 @@ function ajaxMailProduct(email, product_id) {
             showSendEmailBtnWrap();
             showCheckBoxWrap();
             showInputEmailWrap();
+            showProductNameWrap();
 
             console.error(error);
         })
