@@ -57,6 +57,7 @@ const codeAction = {
                 hideCheckBoxWrap();
                 hideInputEmailWrap();
                 hideSendEmailBtnWrap();
+                showAnotherEmailWrap();
                 if (data["voteCount"]) {
                     showAjaxMsgWrap(`Осталось голосов: ${data["voteCount"]}`);
                     showVoteBtnWrap();
@@ -159,7 +160,8 @@ const classes = {
     emailInput: "emailInput",
     serverMsgWrap: "server_msg_wrap",
     popupWithForm: "popup-with-form",
-    sendVoteBtn: "vote_btn"
+    sendVoteBtn: "vote_btn",
+    sendAnotherEmail: "send_another_email_btn"
 };
 
 const messages = {
@@ -178,7 +180,8 @@ const body = document.querySelector('body'),
     ajaxMmsgWrapList = document.querySelectorAll('.ajax_msg_wrap'),
     sendEmailAgainBtnWrapList = document.querySelectorAll('.send_again_email_wrap'),
     sendVoteBtnWrapList = document.querySelectorAll('.vote_btn_wrap'),
-    productNameWrap = document.querySelectorAll('.product_vote_name');
+    productNameWrap = document.querySelectorAll('.product_vote_name'),
+    sendAnotherBtnWrap = document.querySelectorAll('.send_another_email_wrap');
 
 
 
@@ -208,6 +211,7 @@ function setEventHandlers() {
         sendEmail(e.target);
         sendEmailAgain(e.target);
         sendVote(e.target);
+        sendAnotherEmail(e.target);
     });
 
     okBtn.addEventListener("click", (e) => {
@@ -249,6 +253,20 @@ function sendEmailAgain(item) {
         showCheckBoxWrap();
         showInputEmailWrap();
         showSendEmailBtnWrap();
+        hideVoteBtnWrap();
+    }
+}
+
+function sendAnotherEmail(item) {
+    if (item.classList.contains(classes.sendAnotherEmail)) {
+        resetCookie();
+        hideSendEmailAgainBtnWrap();
+        hideAnotherEmailWrap();
+        hideAjaxMsgWrap();
+        showCheckBoxWrap();
+        showInputEmailWrap();
+        showSendEmailBtnWrap();
+        hideVoteBtnWrap();
     }
 }
 
@@ -400,6 +418,22 @@ function hideProductNameWrap() {
         item.style.display = 'none';
     });
 }
+
+
+
+function showAnotherEmailWrap() {
+    sendAnotherBtnWrap.forEach(item => {
+        item.style.display = 'block';
+    });
+}
+
+function hideAnotherEmailWrap() {
+    sendAnotherBtnWrap.forEach(item => {
+        item.style.display = 'none';
+    });
+}
+
+
 
 function showLoader() {
     loader.forEach(item => {
