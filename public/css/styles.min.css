@@ -1034,7 +1034,7 @@ footer .container .brand_footer .second_brand {
 }
 
 form fieldset ol li:first-child {
-    display: block
+    display: none;
 }
 
 .loader_wrap {
