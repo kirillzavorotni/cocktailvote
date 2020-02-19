@@ -1034,7 +1034,7 @@ footer .container .brand_footer .second_brand {
 }
 
 form fieldset ol li:first-child {
-    display: block
+    display: none;
 }
 
 .loader_wrap {
@@ -1079,10 +1079,26 @@ form fieldset ol li:first-child {
     display: none;
 }
 
-.send_again_email_btn, .vote_btn {
+.vote_btn {
     background-color: #12b0c9;
+}
+
+a.send_again_email_btn {
+    color: #0056b3;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 ol {
     height: 350px;
+}
+
+.send_another_email_wrap {
+    display: none;
+}
+
+.send_another_email_wrap .send_another_email_btn {
+    color: #0056b3;
+    text-decoration: underline;
+    cursor: pointer;
 }

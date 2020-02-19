@@ -11,7 +11,7 @@ return [
         'nfd' => "Not Found" // Not found
     ],
     "200" => [
-        'cem' => "Пожалуйста подтвердите свой email", // Confirm email message
+        'cem' => "Мы отправили письмо на ваш email со сылкой для подтверждения голоса. Подтвердите голос", // Confirm email message
         'mc' => "Мы вас помним, пожалуйста подтвердите свой email", // Make confirm email
         'sa' => "Successful authorization", // Successful authorization
         'vit' => "Голос принят", // Vote is taken

@@ -12,7 +12,7 @@ class AuthController extends CommonController
     }
 
     /**
-     * file messages.php contains (errCode, code) messages for response
+     * @throws NotFoundException
      */
     public function authAction()
     {
@@ -41,7 +41,6 @@ class AuthController extends CommonController
 
     public function activateAction()
     {
-
         $activateToken = CommonController::checkGetActivateToken();
 
         if (!$activateToken) {

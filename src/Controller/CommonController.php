@@ -95,10 +95,42 @@ class CommonController
 
 
     /**
-     * @return string|null
+     * @return array|null
      */
     static public function checkGetActivateToken()
     {
+        if (
+            explode('/activate?', $_SERVER['REQUEST_URI'])[1] &&
+            is_array(explode("&", explode('/activate?', $_SERVER['REQUEST_URI'])[1])) &&
+            count(explode("&", explode('/activate?', $_SERVER['REQUEST_URI'])[1])) == 2 &&
+            is_array(explode("=", explode("&", explode('/activate?', $_SERVER['REQUEST_URI'])[1])[0])) &&
+            count(explode("=", explode("&", explode('/activate?', $_SERVER['REQUEST_URI'])[1])[0])) == 2 &&
+            explode("=", explode("&", explode('/activate?', $_SERVER['REQUEST_URI'])[1])[0])[0] == "product_id" &&
+
+            is_array(explode("=", explode("&", explode('/activate?', $_SERVER['REQUEST_URI'])[1])[1])) &&
+            count(explode("=", explode("&", explode('/activate?', $_SERVER['REQUEST_URI'])[1])[1])) == 2 &&
+            explode("=", explode("&", explode('/activate?', $_SERVER['REQUEST_URI'])[1])[1])[0] == "token"
+        ) {
+            $res = [];
+
+            if (
+                explode("=", explode("&", explode('/activate?', $_SERVER['REQUEST_URI'])[1])[1])[0] === "token" &&
+                strlen(explode("=", explode("&", explode('/activate?', $_SERVER['REQUEST_URI'])[1])[1])[1]) > 0
+            ) {
+                $res[] = explode("=", explode("&", explode('/activate?', $_SERVER['REQUEST_URI'])[1])[1])[1];
+            }
+
+            if (
+                explode("=", explode("&", explode('/activate?', $_SERVER['REQUEST_URI'])[1])[0])[0] === "product_id" &&
+                isset(explode("=", explode("&", explode('/activate?', $_SERVER['REQUEST_URI'])[1])[0])[1])
+            ) {
+                $res[] = explode("=", explode("&", explode('/activate?', $_SERVER['REQUEST_URI'])[1])[0])[1];
+            }
+
+            return $res;
+        }
+
+
         if (
             explode('/activate?', $_SERVER['REQUEST_URI'])[1] &&
             is_array(explode("=", explode('/activate?', $_SERVER['REQUEST_URI'])[1])) &&
@@ -111,7 +143,7 @@ class CommonController
             );
 
             if (isset($name) && isset($value) && $name === "token" && strlen($value) > 0) {
-                return $value;
+                return [$value];
             }
         }
 

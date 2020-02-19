@@ -15,6 +15,7 @@ require_once '../src/Controller/CommonController.php';
 require_once '../src/Controller/DefaultController.php';
 require_once '../src/Controller/AuthController.php';
 require_once '../src/Controller/VoteController.php';
+require_once '../src/Controller/ReportsController.php';
 
 // Models
 require_once '../src/Model/CommonModel.php';
@@ -23,6 +24,7 @@ require_once '../src/Model/ValidateModel.php';
 require_once '../src/Model/EmailModel.php';
 require_once '../src/Model/VoteModel.php';
 require_once '../src/Model/ActivateModel.php';
+require_once '../src/Model/ReportsModel.php';
 
 // Mailer
 require '../src/Service/MallerService.php';
