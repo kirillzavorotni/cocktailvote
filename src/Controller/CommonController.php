@@ -9,6 +9,9 @@ class CommonController
     static private $defaultControllerName = "DefaultController";
     static private $indexActionName = "indexAction";
 
+    static private $reportsControllerName = "ReportsController";
+    static private $getVotesReportMethod = "getVotesReport";
+
     public function getRequestContent()
     {
         $postData = file_get_contents('php://input');
@@ -29,7 +32,8 @@ class CommonController
 
         if (
             ($currentDate < self::$timeConfig[0] || $currentDate > self::$timeConfig[1]) &&
-            ($controllerClass !== self::$defaultControllerName && $actionName !== self::$indexActionName)
+            ($controllerClass !== self::$defaultControllerName && $actionName !== self::$indexActionName) &&
+            ($controllerClass !== self::$reportsControllerName && $actionName !== self::$getVotesReportMethod)
         ) {
             self::sendJSONResponse(false, "403", "nva");
         }
